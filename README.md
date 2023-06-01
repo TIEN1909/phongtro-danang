@@ -1,14 +1,5 @@
 laravel 8x
 
-## DEPLOY
-
--   TOKEN => GR1348941ZND5VzQotRyEyJZuhh5X
--   GITHUB => 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
-
-## CI/CD
-
-https://heliotech.me/blog/gitlab-ci
-
 ----phongtrodanang
 
 -   1 bảng lưu lại lịch sử nạp tiền => recharge_history
