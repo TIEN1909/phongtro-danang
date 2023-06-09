@@ -23,7 +23,6 @@ class PageHomeService
             'roomVipFive'  => $roomVipFive,
             'locationsHot' => $locationsHot
         ];
-        // dd($locationCity);
 
         return $viewData;
     }

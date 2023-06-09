@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 
+
 Route::group(['namespace' => 'User', 'prefix' => 'user', 'middleware' => 'checkLoginUser'], function () {
     Route::get('cap-nhat.html', 'UserProfileController@index')->name('get_user.profile.index');
     Route::post('cap-nhat.html', 'UserProfileController@update');
@@ -40,4 +41,9 @@ Route::group(['namespace' => 'User', 'prefix' => 'user', 'middleware' => 'checkL
         Route::get('{slug}-{id}', 'UserRechargeController@switchRecharge')->name('get_user.recharge.switch')
             ->where(['slug' => '[a-z-0-9-]+', 'id' => '[0-9]+',]);
     });
+});
+
+Route::group(['namespace' => 'User', 'prefix' => 'user'], function () {
+    Route::get('thay-doi-mat-khau.html', 'UserProfileController@forgotPassword')->name('get.forget-password');
+    Route::post('thay-doi-mat-khau.html', 'UserProfileController@forgotPasswordReset')->name('get.forgot-password');
 });

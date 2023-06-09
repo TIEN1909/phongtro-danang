@@ -30,15 +30,20 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        try{
-            $categoriesGlobalSidebar = DanhMuc::select('id','ten','slug')->get();
-            $categoriesGlobal = DanhMuc::select('id','ten','slug')->get();
+        try {
+            $categoriesGlobal = DanhMuc::select('id', 'ten', 'slug')->where('trangthai', 1)->get();
+            $categoriesGlobalSidebar = DanhMuc::select('id', 'ten', 'slug')->get();
             $articlesNew = BaiViet::orderByDesc('id')->limit(5)->get();
-            $locationsCity = DiaChi::where('parent_id', 0)->select('id','ten')->get();
-        }catch (\Exception $exception){
+            $locationsCity = DiaChi::where('parent_id', 0)->select('id', 'ten')->get();
 
+
+            // $categoriesGlobal = DanhMuc::select('id','name','slug')->get();
+            // $categoriesGlobalSidebar = DanhMuc::select('id','name','slug')->withCount('room')->get();
+
+
+        } catch (\Exception $exception) {
         }
-        
+
         View::share('categoriesGlobal', $categoriesGlobal ?? []);
         View::share('categoriesGlobalSidebar', $categoriesGlobalSidebar ?? []);
         View::share('articlesNew', $articlesNew ?? []);

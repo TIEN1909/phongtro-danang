@@ -74,7 +74,7 @@ class UserRechargeController extends Controller
         try {
             $data                = $request->except('_token');
             $data['created_at']  = Carbon::now();
-            $data['tien']       = $request->price;
+            $data['tien']       = $request->gia;
             $data['nguoidung_id']     = get_data_user('web');
             $data['tongtien'] = $data['tien'];
             $data['loai']        = 3;
@@ -95,23 +95,23 @@ class UserRechargeController extends Controller
         $vnp_TmnCode = "1J41K9IH"; //Website ID in VNPAY System
         $vnp_HashSecret = "RGXTPJWTMKZVBJPSEXIYYQFNWRYNQKSR"; //Secret key
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = "http://seri-phongtro.abc:8888/user/nap-tien/post-back-atm-internet-banking";
+        $vnp_Returnurl = "http://timphongtrodanang.abc/user/nap-tien/post-back-atm-internet-banking";
         $vnp_apiUrl = "http://sandbox.vnpayment.vn/merchant_webapi/merchant.html";
 
         $startTime = date("YmdHis");
         $expire = date('YmdHis', strtotime('+15 minutes', strtotime($startTime)));
 
-        $vnp_TxnRef = $rechargeHistory->code;
+        $vnp_TxnRef = $rechargeHistory->ma;
         $vnp_OrderInfo = 'Nạp tiền';
         $vnp_OrderType = 'other';
-        $vnp_Amount = $rechargeHistory->total_money * 100;
+        $vnp_Amount = $rechargeHistory->tongtien * 100;
         $vnp_Locale = 'vn';
         $vnp_BankCode = 'NCB';
         $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
         //        $vnp_ExpireDate = $_POST['txtexpire'];
-        $vnp_Bill_Mobile = get_data_user('web', 'phone');
+        $vnp_Bill_Mobile = get_data_user('web', 'sodienthoai');
         $vnp_Bill_Email = get_data_user('web', 'email');
-        $fullName = get_data_user('web', 'name');
+        $fullName = get_data_user('web', 'ten');
         if (isset($fullName) && trim($fullName) != '') {
             $name = explode(' ', $fullName);
             $vnp_Bill_FirstName = array_shift($name);
@@ -124,7 +124,6 @@ class UserRechargeController extends Controller
         $vnp_Inv_Email = $vnp_Bill_Email;
         $vnp_Inv_Customer = 'Võ Thành Tiến';
         $vnp_Inv_Address = 'Đà Nẵng';
-        $vnp_Inv_Company = '';
         $vnp_Inv_Taxcode = '0102182292';
         $vnp_Inv_Type = 'I';
         $inputData = array(
@@ -147,7 +146,6 @@ class UserRechargeController extends Controller
             "vnp_Inv_Email" => $vnp_Inv_Email,
             "vnp_Inv_Customer" => $vnp_Inv_Customer,
             "vnp_Inv_Address" => $vnp_Inv_Address,
-            "vnp_Inv_Company" => $vnp_Inv_Company,
             "vnp_Inv_Taxcode" => $vnp_Inv_Taxcode,
             "vnp_Inv_Type" => $vnp_Inv_Type
         );
@@ -188,7 +186,7 @@ class UserRechargeController extends Controller
         try {
             DB::beginTransaction();
             $code = $request->vnp_TxnRef;
-            $rechargeHistory     = LichSuNapTien::where('code', $code)->first();
+            $rechargeHistory     = LichSuNapTien::where('ma', $code)->first();
             if (!$rechargeHistory) {
                 return redirect()->route('get_user.recharge.atm');
             }
@@ -196,20 +194,20 @@ class UserRechargeController extends Controller
             if ($statusCode == '00') {
                 // tiến hành cộng tiền
                 // Tiếp hành update code
-                $rechargeHistory->status = LichSuNapTien::STATUS_SUCCESS;
+                $rechargeHistory->trangthai = LichSuNapTien::STATUS_SUCCESS;
                 $rechargeHistory->save();
 
                 $user = NguoiDung::find($rechargeHistory->nguoidung_id);
                 if (!$user) {
-                    $rechargeHistory->note   = 'User không hợp lệ';
-                    $rechargeHistory->status = LichSuNapTien::STATUS_CANCEL;
+                    $rechargeHistory->ghichu   = 'User không hợp lệ';
+                    $rechargeHistory->trangthai = LichSuNapTien::STATUS_CANCEL;
                     $rechargeHistory->save();
                     DB::commit();
                     // show thông báo
                     return redirect()->route('get_user.recharge.atm');
                 } else {
                     Log::info("--- cộng tiền");
-                    $user->sodukhadung += $rechargeHistory->total_money;
+                    $user->sodukhadung += $rechargeHistory->tongtien;
                     $user->save();
                 }
                 DB::commit();
@@ -239,8 +237,8 @@ class UserRechargeController extends Controller
                     break;
             }
 
-            $rechargeHistory->status = LichSuNapTien::STATUS_ERROR;
-            $rechargeHistory->note = $message;
+            $rechargeHistory->trangthai = LichSuNapTien::STATUS_ERROR;
+            $rechargeHistory->ghichu = $message;
             $rechargeHistory->save();
             // show thông báo
             DB::commit();

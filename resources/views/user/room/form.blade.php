@@ -13,32 +13,33 @@
                     {{ Request::get('location_city_id') == $item->id ? "selected" : "" }}>{{ $item->ten }}</option>--}}
                     {{-- @endforeach--}}
                     {{-- </select>--}}
-                    <select name="thanhpho_id" class="form-control" id="thanhpho_id"
+                    <select name="qhuyen_id" class="form-control" id="qhuyen_id"
                         data-placeholder="Click chọn quận huyện">
                         <option value="">Chọn quận huyện</option>
                         @foreach($locationsCity ?? [] as $item)
                         <option value="{{ $item->id }}"
-                            {{ $item->id == ($room->thanhpho_id ?? (Request::get('thanhpho_id'))) ? "selected" : ""}}>
+                            {{ $item->id == ($room->qhuyen_id ?? (Request::get('qhuyen_id'))) ? "selected" : ""}}>
                             {{ $item->ten }}
                         </option>
                         @endforeach
                     </select>
-                    @if ($errors->first('thanhpho_id'))
-                    <span class="text-error">{{ $errors->first('thanhpho_id') }}</span>
+                    @if ($errors->first('qhuyen_id'))
+                    <span class="text-error">{{ $errors->first('qhuyen_id') }}</span>
                     @endif
                 </div>
                 <div class="form-group row-lists-3">
                     <label for="name">Phường xã</label>
-                    <select name="quan_id" class="form-control " id="quan_id" data-placeholder="Click chọn quận huyện">
+                    <select name="phuongxa_id" class="form-control " id="phuongxa_id"
+                        data-placeholder="Click chọn quận huyện">
                         <option value="">Chọn phường xã</option>
                         @foreach($districts ?? [] as $item)
-                        <option value="{{ $item->id }}" {{ $item->id == ($room->quan_id ?? 0) ? "selected" : ""}}>
+                        <option value="{{ $item->id }}" {{ $item->id == ($room->phuongxa_id ?? 0) ? "selected" : ""}}>
                             {{ $item->ten }}
                         </option>
                         @endforeach
                     </select>
-                    @if ($errors->first('quan_id'))
-                    <span class="text-error">{{ $errors->first('quan_id') }}</span>
+                    @if ($errors->first('phuongxa_id'))
+                    <span class="text-error">{{ $errors->first('phuongxa_id') }}</span>
                     @endif
                 </div>
                 <div class="form-group row-lists-3  d-none">
@@ -115,7 +116,7 @@
             </div>
             <div class="row-lists">
                 <div class="form-group">
-                    <label for="name">Tông tin liên hệ</label>
+                    <label for="name">Thông tin liên hệ</label>
                     <input type="text" class="form-control" disabled placeholder="Thông tin liên hệ"
                         value="{{ \Auth::user()->ten }}">
                 </div>
@@ -211,15 +212,15 @@ var URL_LOAD_WARD = '{{ route("get_user.load.wards") }}'
 
 <script>
 $(function() {
-    $("#thanhpho_id").change(function() {
+    $("#qhuyen_id").change(function() {
         let $this = $(this);
-        let thanhpho_id = $this.val();
-        console.log('----', thanhpho_id);
+        let qhuyen_id = $this.val();
+        console.log('----', qhuyen_id);
 
         $.ajax({
                 url: URL_LOAD_DISTRICT,
                 data: {
-                    thanhpho_id: thanhpho_id
+                    qhuyen_id: qhuyen_id
                 },
             })
             .done(function(data) {
@@ -228,21 +229,21 @@ $(function() {
                     data.map((item, index) => {
                         options += `<option value="${item.id}"> ${item.ten}</option>`
                     })
-                    $("#quan_id").html(options);
+                    $("#phuongxa_id").html(options);
                 }
                 console.log('---------- data: ', data);
             });
     })
 
-    $("#quan_id").change(function() {
+    $("#phuongxa_id").change(function() {
         let $this = $(this);
-        let quan_id = $this.val();
-        console.log('----', quan_id);
+        let phuongxa_id = $this.val();
+        console.log('----', phuongxa_id);
 
         $.ajax({
                 url: URL_LOAD_WARD,
                 data: {
-                    quan_id: quan_id
+                    phuongxa_id: phuongxa_id
                 },
             })
             .done(function(data) {

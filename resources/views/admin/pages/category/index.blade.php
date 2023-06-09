@@ -1,7 +1,6 @@
 @extends('admin.layouts.app_master_admin')
 @section('content')
-<h2 class="mt-3" style="display: flex;justify-content: space-between"><span>Danh sách danh mục</span> <a
-        href="{{ route('get_admin.category.create') }}" style="font-size: 16px;">Thêm mới</a></h2>
+<h2 class="mt-3" style="display: flex;justify-content: space-between"><span>Danh sách danh mục</span> <a href="{{ route('get_admin.category.create') }}" style="font-size: 16px;">Thêm mới</a></h2>
 <div class="">
     <form action="" class="row">
         <div class="col-sm-3">
@@ -30,7 +29,7 @@
             <td scope="row">{{ $item->id }}</td>
             <td scope="row">{{ $item->ten }}</td>
             <td scope="row">
-                @if ($item->status == 1)
+                @if ($item->trangthai == 1)
                 <span class="text-danger">Hiển thị</span>
                 @else
                 <span class="text-pink">Ẩn</span>
@@ -42,8 +41,7 @@
                 <a href="{{ route('get_admin.category.update', $item->id) }}" class="text-blue">
                     <i class="bi bi-pencil-square"></i>
                 </a>
-                <a href="{{ route('get_admin.category.delete', $item->id) }}" class="text-danger "
-                    style="margin-left: 20px">
+                <a href="{{ route('get_admin.category.delete', $item->id) }}" class="text-danger " style="margin-left: 20px">
                     <i class="bi bi-trash"></i>
                 </a>
             </td>

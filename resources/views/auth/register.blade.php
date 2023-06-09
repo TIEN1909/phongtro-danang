@@ -19,6 +19,7 @@
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" class="form-control" required placeholder="" name="email">
+
             </div>
             <div class="form-group">
                 <label for="sodienthoai">Số điện thoại</label>
@@ -33,9 +34,9 @@
             </div>
 
             <div class="form-group form-group-register">
-                <p>Bấm vào nút đăng ký tức là bạn đã đồng ý với <a href="#" target="_blank">quy định sử dụng</a> của
-                    chúng tôi</p>
-                <p>Bạn đã có tài khoản? <a class="link" href="{{ route('get.login') }}">Đăng nhập ngay</a></p>
+
+                <p class="text-center">Bạn đã có tài khoản? <a class="link" href="{{ route('get.login') }}">Đăng nhập
+                        ngay</a></p>
             </div>
         </form>
     </div>

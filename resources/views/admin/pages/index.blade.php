@@ -4,7 +4,7 @@
 <style>
     .total-money {
         background-color: transparent;
-        border: 1px solid;
+        border: 1px solid #ececdd;
         padding: 2rem 1rem;
     }
 
@@ -136,18 +136,17 @@
                 <tr style="text-align: center">
                     <td style="text-align: left" scope="row">{{ $item->id }}</td>
                     <td>
-                        @if ($item->type == 1)
+                        @if ($item->loai == 1)
                         <span>Tin tường</span>
-                        @elseif($item->type == 2)
+                        @elseif($item->loai == 2)
                         <span>Vip 3</span>
-                        @elseif($item->type == 3)
+                        @elseif($item->loai == 3)
                         <span>Vip 2</span>
-                        @elseif($item->type == 4)
+                        @elseif($item->loai == 4)
                         <span>Vip 1</span>
                         @else
                         <span>Đặc biệt</span>
                         @endif
-                        <span>{{ $item->type }}</span>
                     </td>
                     <td scope="row"><span class="text-danger text-bold">{{ number_format($item->tien,0,',','.') }}đ</span></td>
                     <td scope="row">

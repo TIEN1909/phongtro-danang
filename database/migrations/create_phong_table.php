@@ -20,9 +20,8 @@ class CreateRoomsTable extends Migration
             $table->string('anhdaidien')->nullable();
             $table->tinyInteger('hot')->default(0);
             $table->string('mota', 300)->nullable();
-            $table->bigInteger('thanhpho_id')->default(0);
-            $table->bigInteger('quan_id')->default(0);
-            $table->bigInteger('huyen_id')->default(0);
+            $table->bigInteger('qhuyen_id')->default(0);
+            $table->bigInteger('phuongxa_id')->default(0);
             $table->bigInteger('gia')->default(0);
             $table->tinyInteger('trangthai')->default(1);
             $table->tinyInteger('khoanggia')->default(1);

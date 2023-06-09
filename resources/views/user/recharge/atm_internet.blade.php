@@ -24,7 +24,7 @@
             @csrf
             <div class="form-group">
                 <label for="phone">Số tiền nạp</label>
-                <input type="number" class="form-control" placeholder="" name="price" value="">
+                <input type="number" class="form-control" placeholder="" name="gia" value="">
                 <p><i>Số tiền cần nạp tối thiểu phải lớn 10.000 đ</i></p>
             </div>
             <div class="form-group">

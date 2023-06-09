@@ -16,7 +16,6 @@ class DiaChi extends Model
     protected $setType = [
         1 => 'Quận huyện',
         2 => 'Phường xã',
-        // 3 => 'Phường xã',
     ];
 
     public function getType()
@@ -26,11 +25,11 @@ class DiaChi extends Model
 
     public function roomDistricts()
     {
-        return $this->hasMany(Phong::class, 'huyen_id');
+        return $this->hasMany(Phong::class, 'qhuyen_id');
     }
 
     public function rooms()
     {
-        return $this->hasMany(Phong::class, 'thanhpho_id');
+        return $this->hasMany(Phong::class, 'phuongxa_id');
     }
 }

@@ -2,9 +2,9 @@
     <form role="search" method="GET" action="{{ route('get.room.search') }}" class="searchform js-form-submit-data">
         <div class="search_field container" style="justify-content: space-between">
             <style>
-            .search_field_item {
-                width: 100% !important;
-            }
+                .search_field_item {
+                    width: 100% !important;
+                }
             </style>
             <div class="search_field_item search_field_item_loaitin">
                 <label class="search_field_item_label">Loại tin</label>
@@ -20,20 +20,11 @@
             </div>
             <div class="search_field_item search_field_item_tinhthanh">
                 <label class="search_field_item_label">Quận huyện</label>
-                {{-- <select id="search_city" class="form-control tinh-tp js_select2_tinhthanh js-select-tinhthanhpho select2-hidden-accessible" name="location_city_id" tabindex="-1" aria-hidden="true">--}}
-                {{-- <option value="">Tất cả</option>--}}
-                {{-- @foreach($locationsCity ?? [] as $item)--}}
-                {{-- <option value="{{ $item->id }}"
-                {{ Request::get('location_city_id') == $item->id ? "selected" : "" }}>{{ $item->name }}</option>--}}
-                {{-- @endforeach--}}
-                {{-- </select>--}}
-                <select name="thanhpho_id" class="form-control" id="thanhpho_id"
-                    data-placeholder="Click chọn tỉnh thành">
+                <select name="qhuyen_id" class="form-control" id="qhuyen_id" data-placeholder="Click chọn tỉnh thành">
                     <option value="">Chọn quận huyện</option>
 
                     @foreach($locationsCity ?? [] as $item)
-                    <option value="{{ $item->id }}"
-                        {{ $item->id == ($room->thanhpho_id ?? (Request::get('thanhpho_id'))) ? "selected" : ""}}>
+                    <option value="{{ $item->id }}" {{ $item->id == ($room->qhuyen_id ?? (Request::get('qhuyen_id'))) ? "selected" : ""}}>
                         {{ $item->ten }}
                     </option>
                     @endforeach
@@ -42,21 +33,10 @@
             </div>
             <div class="search_field_item search_field_item_quanhuyen ">
                 <label class="search_field_item_label">Phường xã</label>
-                <select name="quan_id" class="form-control " id="quan_id" data-placeholder="Click chọn quận huyện">
+                <select name="phuongxa_id" class="form-control " id="phuongxa_id" data-placeholder="Click chọn quận huyện">
                     <option value="">Chọn phường xã</option>
                     @foreach($districts ?? [] as $item)
-                    <option value="{{ $item->id }}"
-                        {{ $item->id == ($room->quan_id ?? (Request::get('quan_id'))) ? "selected" : ""}}>
-                        {{ $item->ten }}
-                    </option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="search_field_item search_field_item_duongpho d-none">
-                <label class="search_field_item_label">Phường xã</label>
-                <select name="huyen_id" class="form-control" id="huyen_id" data-placeholder="Click chọn phường xã">
-                    @foreach($wards ?? [] as $item)
-                    <option value="{{ $item->id }}" {{ $item->id == ($room->huyen_id ?? 0) ? "selected" : ""}}>
+                    <option value="{{ $item->id }}" {{ $item->id == ($room->phuongxa_id ?? (Request::get('phuongxa_id'))) ? "selected" : ""}}>
                         {{ $item->ten }}
                     </option>
                     @endforeach
@@ -74,17 +54,18 @@
             </div>
             <div class="search_field_item search_field_item_dientich">
                 <label class="search_field_item_label">Diện tích</label>
-                <select id="search_dientich" name="area" class="form-control js_select2_acreage">
+                <select id="search_dientich" name="khuvuc" class="form-control js_select2_acreage">
                     <option value="">Chọn diện tích</option>
-                    @foreach(config('config_search.area') as $key => $item)
-                    <option value="{{ $key }}" {{ Request::get('area') == $key ? "selected" : "" }}>{{ $item }}</option>
+                    @foreach(config('config_search.khuvuc') as $key => $item)
+                    <option value="{{ $key }}" {{ Request::get('khuvuc') == $key ? "selected" : "" }}>{{ $item }}
+                    </option>
                     @endforeach
                 </select>
             </div>
             <div class="search_field_item search_field_item_submit">
                 <label class="search_field_item_label mb-item-label">&nbsp;</label>
                 <div>
-                    <button type="submit" class="btn btn-default btn_search_box form-control"> Lọc tin </button>
+                    <button type="submit" class="btn btn-default btn_search_box form-control"> Tìm kiếm </button>
                 </div>
             </div>
         </div>
@@ -92,60 +73,90 @@
 </div>
 
 <script>
-var URL_LOAD_DISTRICT = '{{ route("get_user.load.district") }}'
-var URL_LOAD_WARD = '{{ route("get_user.load.wards") }}'
+    var URL_LOAD_DISTRICT = '{{ route("get_user.load.district") }}'
+    var URL_LOAD_WARD = '{{ route("get_user.load.wards") }}'
 </script>
 @push('script')
 <script src="/js/user_room.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" crossorigin="anonymous"
-    referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-$(function() {
-    $("#thanhpho_id").change(function() {
-        let $this = $(this);
-        let thanhpho_id = $this.val();
-        console.log('----', thanhpho_id);
-
+    $(document).ready(function() {
+        console.log("document loaded");
         $.ajax({
                 url: URL_LOAD_DISTRICT,
                 data: {
-                    thanhpho_id: thanhpho_id
+                    qhuyen_id: qhuyen_id
                 },
             })
             .done(function(data) {
-                if (data) {
-                    let options = `<option value="0"> Chọn phường xã </option>`;
-                    data.map((item, index) => {
-                        options += `<option value="${item.id}"> ${item.ten}</option>`
-                    })
-                    $("#quan_id").html(options);
-                }
+                // if (data) {
+                //     let options = `<option value="0"> Chọn phường xã </option>`;
+                //     data.map((item, index) => {
+                //         options += `<option value="${item.id}"> ${item.ten}</option>`
+                //     })
+                //     $("#phuongxa_id").html(options);
+                // }
+                // console.log('---------- data: ', data);
                 console.log('---------- data: ', data);
-            });
-    })
-
-    $("#quan_id").change(function() {
-        let $this = $(this);
-        let quan_id = $this.val();
-        console.log('----', quan_id);
-
-        $.ajax({
-                url: URL_LOAD_WARD,
-                data: {
-                    quan_id: quan_id
-                },
             })
-            .done(function(data) {
-                if (data) {
-                    let options = `<option value="0"> Chọn phường xã </option>`;
-                    data.map((item, index) => {
-                        options += `<option value="${item.id}"> ${item.ten}</option>`
-                    })
-                    $("#huyen_id").html(options);
-                }
-                console.log('---------- data: ', data);
+            .fail(function() {
+                let options = `<option value="0"> Chọn phường xã </option>`;
+                $("#phuongxa_id").html(options);
             });
+
+    });
+
+    $(function() {
+        $("#qhuyen_id").change(function() {
+            let $this = $(this);
+            let qhuyen_id = $this.val();
+            console.log('----', qhuyen_id);
+
+            $.ajax({
+                    url: URL_LOAD_DISTRICT,
+                    data: {
+                        qhuyen_id: qhuyen_id
+                    },
+                })
+                .done(function(data) {
+                    if (data) {
+                        let options = `<option value="0"> Chọn phường xã </option>`;
+                        data.map((item, index) => {
+                            options += `<option value="${item.id}"> ${item.ten}</option>`
+                        })
+                        $("#phuongxa_id").html(options);
+                    }
+                    console.log('---------- data: ', data);
+                })
+                .fail(function() {
+                    let options = `<option value="0"> Chọn phường xã </option>`;
+                    $("#phuongxa_id").html(options);
+                });
+        })
+
+
+        $("#phuongxa_id").change(function() {
+            let $this = $(this);
+            let phuongxa_id = $this.val();
+            console.log('----', phuongxa_id);
+
+            $.ajax({
+                    url: URL_LOAD_WARD,
+                    data: {
+                        phuongxa_id: phuongxa_id
+                    },
+                })
+                .done(function(data) {
+                    if (data) {
+                        let options = `<option value="0"> Chọn phường xã </option>`;
+                        data.map((item, index) => {
+                            options += `<option value="${item.id}"> ${item.ten}</option>`
+                        })
+                        $("#huyen_id").html(options);
+                    }
+                    console.log('---------- data: ', data);
+                });
+        })
     })
-})
 </script>
 @endpush

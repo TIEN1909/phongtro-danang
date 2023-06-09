@@ -2424,12 +2424,12 @@ i {
 }
 .header-area .user-welcome .welcome-text ::before {
   content: "";
-  width: 100%;
-  height: 27px;
+  width: 103%;
+  height: 35px;
   background-color: transparent;
   position: absolute;
   left: 0;
-  top: -22px;
+  top: -28px;
 }
 .header-area .user-welcome .welcome-text:hover .user-history {
   display: block;
@@ -2765,7 +2765,6 @@ i {
   box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.1);
   margin: 0 10px;
   color: #fff;
-  background-color: red;
   position: relative;
   overflow: hidden;
 }

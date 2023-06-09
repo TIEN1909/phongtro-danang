@@ -23,7 +23,7 @@
     </ol>
 </section>
 <h1 class="page-title-h1">Phương thức nạp tiền</h1>
-<div class="s d-md-block">
+<div class=" d-md-block">
     <style>
         .addfund_method_list {
             display: flex;

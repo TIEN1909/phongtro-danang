@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\User;
 
 use App\Models\NguoiDung;
+use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserUpdatePhoneRequest;
-
-
+use App\Mail\SendMailResetPassword;
+use App\Models\DoiMatKhau;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class UserProfileController extends Controller
 {
@@ -26,6 +29,7 @@ class UserProfileController extends Controller
         if (!$user) return abort(404);
         $user->ten = $request->name;
         $user->email = $request->email;
+        $user->password = Hash::make($request->password);
 
         if ($request->anhdaidien) {
             // dd($request->anhdaidien);
@@ -56,21 +60,19 @@ class UserProfileController extends Controller
     {
         $user = NguoiDung::find(Auth::user()->id);
         if (!$user) return abort(404);
+    }
 
-        // lấy user cập nhật
-        // check gen code
-        // 3 Xử lý check code và update phone
+    public function forgotPassword()
+    {
+        return view('auth.forgot_password');
+    }
 
-        // $user = Auth::user();
-        // $old_phone_number = $user->phone_new;
-        // $new_phone_number = $request->input('phone_new');
-        // $user->phone_new = $new_phone_number;
-        // $user->save();
 
-        // // Gửi tin nhắn SMS thông báo cho người dùng
-        // $sms = new SmsGateway();
-        // $sms->send($old_phone_number, "Số điện thoại của bạn đã được cập nhật thành công thành số: $new_phone_number");
-
-        // return redirect('')->route('get_user.profile.update_phone');
+    public function forgotPasswordReset(Request $request)
+    {
+        $data = $request->all();
+        $mail = new SendMailResetPassword($data['email']);
+        Mail::to($data['email'])->send($mail);
+        return redirect(route('get.login'));
     }
 }

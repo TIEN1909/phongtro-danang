@@ -27,6 +27,8 @@
         tìm
         phòng trọ <a href="{{ route('get_user.room.create') }}" title="Thêm mới" class="btn btn-sm btn-blue">Thêm tin
             mới</a></h1>
+
+    <span class="label label-success">{{Session::get('success')}}</span>
     <div class="table-responsive">
         <table class="table">
             <thead>
@@ -46,29 +48,22 @@
                     <td style="text-align: center">#{{ $item->id }}</td>
                     <td>
                         <div style="overflow: hidden;width: 100px;height: 100px;margin: 0 auto;position: relative;">
-                            <a href="{{ route('get.room.detail',['id' => $item->id,'slug' => $item->slug]) }}"
-                                target="_blank">
-                                <img src="{{ pare_url_file($item->anhdaidien) }}" alt=""
-                                    style="display: block;width: 100%;height: 100%;object-fit: cover;">
+                            <a href="{{ route('get.room.detail',['id' => $item->id,'slug' => $item->slug]) }}" target="_blank">
+                                <img src="{{ pare_url_file($item->anhdaidien) }}" alt="" style="display: block;width: 100%;height: 100%;object-fit: cover;">
                             </a>
                         </div>
                     </td>
                     <td>
-                        <a href="{{ route('get.room.detail',['id' => $item->id,'slug' => $item->slug]) }}"
-                            target="_blank" style="font-size: 14px;font-weight: 500;color: #007aff;"><span
-                                class="label label-danger">{{ $item->category->ten ?? "[N\A]" }}</span>
-                            {{ $item->ten }}</a>
-                        <p
-                            style="font-size: 14px;font-weight: 400;color: #212121;text-decoration: none;margin-bottom: 5px">
+                        <a href="{{ route('get.room.detail',['id' => $item->id,'slug' => $item->slug]) }}" target="_blank" style="font-size: 14px;font-weight: 500;color: #007aff;"><span class="label label-danger">{{ $item->category->ten ?? "[N\A]" }}</span>
+                            <span style="text-transform:uppercase;">{{ $item->ten }}</span>
+                        </a>
+                        <p style="font-size: 14px;font-weight: 400;color: #212121;text-decoration: none;margin-bottom: 5px">
                             <span class="fa fa-map-marker"></span>
                             @if (isset($item->wards->ten))
                             <span>{{ $item->wards->ten ?? "" }} - </span>
                             @endif
                             @if (isset($item->district->ten))
-                            <span>{{ $item->district->ten ?? "" }} - </span>
-                            @endif
-                            @if (isset($item->city))
-                            <span>{{ $item->city->ten }}</span>
+                            <span>{{ $item->district->ten ?? "" }} </span>
                             @endif
                         </p>
                         <p>
@@ -80,7 +75,7 @@
                             \App\Models\Phong::STATUS_DEFAULT)
                             <a href="{{ route('get_user.room.pay', $item->id) }}"> <i class="fa fa-refresh"></i> Thanh
                                 toán
-                                hoạc gia hạn</a>
+                                hoặc gia hạn</a>
                             <a href="{{ route('get_user.room.update', $item->id) }}"> <i class="fa fa-pencil"></i> Sửa
                                 tin</a>
                             @endif
@@ -98,8 +93,7 @@
                     <td style="text-align: center"><span>{{ $item->thoigian_batdau }}</span></td>
                     <td style="text-align: center"><span>{{ $item->thoigian_ketthuc }}</span></td>
                     <td style="text-align: center">
-                        <span
-                            class="{{ $item->getStatus($item->trangthai)['class'] ?? '...' }}">{{ $item->getStatus($item->trangthai)['name'] ?? "..." }}</span>
+                        <span class="{{ $item->getStatus($item->trangthai)['class'] ?? '...' }}">{{ $item->getStatus($item->trangthai)['name'] ?? "..." }}</span>
                     </td>
                 </tr>
                 @endforeach
@@ -107,8 +101,13 @@
         </table>
     </div>
 </div>
+<div>
+    {!! $rooms->appends($query ?? [])->links('vendor.pagination.bootstrap-4') !!}
+</div>
 @stop
 
 @push('script')
 <script src="/js/home.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+
 @endpush

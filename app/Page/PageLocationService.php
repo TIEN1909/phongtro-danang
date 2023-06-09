@@ -31,11 +31,12 @@ class PageLocationService
     {
         $location = DiaChi::find($id);
         $rooms    = RoomService::getListsRoom($request, $params = [
-            'location_district_id' => $id
+            'location_city_id' => $id
         ]);
-
+        $wards =  DiaChi::where('parent_id', $id)->get();
         return [
             'location'  => $location,
+            'wards' => $wards,
             'rooms'     => $rooms,
             'query'     => $request->query()
         ];
@@ -45,8 +46,10 @@ class PageLocationService
     {
         $location = DiaChi::find($id);
         $rooms    = RoomService::getListsRoom($request, $params = [
-            'huyen_id' => $id
+            'phuongxa_id' => $id
         ]);
+
+
 
         return [
             'location'  => $location,

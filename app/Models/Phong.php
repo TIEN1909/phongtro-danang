@@ -54,19 +54,18 @@ class Phong extends Model
         return $this->belongsTo(DanhMuc::class, 'danhmuc_id');
     }
 
-    public function city()
-    {
-        return $this->belongsTo(DiaChi::class, 'thanhpho_id');
-    }
     public function district()
     {
-        return $this->belongsTo(DiaChi::class, 'quan_id');
+        return $this->belongsTo(DiaChi::class, 'qhuyen_id');
     }
     public function wards()
     {
-        return $this->belongsTo(DiaChi::class, 'huyen_id');
+        return $this->belongsTo(DiaChi::class, 'phuongxa_id');
     }
-
+    public function city()
+    {
+        return $this->belongsTo(DiaChi::class, 'phuongxa_id');
+    }
     public function paymentHistory()
     {
         return $this->hasMany(LichSuThanhToan::class, 'phong_id');

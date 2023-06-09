@@ -12,7 +12,7 @@ class AdminRoomController extends Controller
 {
     public function index(Request $request)
     {
-        $rooms      = Phong::with('category:id,ten,slug', 'city:id,ten,slug', 'district:id,ten,slug', 'wards:id,ten,slug');
+        $rooms      = Phong::with('category:id,ten,slug', 'district:id,ten,slug', 'wards:id,ten,slug');
         if ($request->danhmuc_id)
             $rooms->where('danhmuc_id', $request->danhmuc_id);
 
@@ -21,7 +21,6 @@ class AdminRoomController extends Controller
 
         $rooms      = $rooms->orderByDesc('id')->paginate(10);
         $categories = DanhMuc::select('id', 'ten')->get();
-        // dd($rooms);
         $viewData   = [
             'rooms'      => $rooms,
             'categories' => $categories,

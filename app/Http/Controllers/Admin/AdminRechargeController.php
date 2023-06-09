@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\LichSuNapTien;
+use App\Models\LichSuThanhToan;
 use App\Models\NguoiDung;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -24,7 +25,7 @@ class AdminRechargeController extends Controller
 
     public function indexPay(Request $request)
     {
-        $paymentHistory = LichSuNapTien::with('user:id,ten')
+        $paymentHistory = LichSuThanhToan::with('user:id,ten')
             ->orderByDesc('id')->paginate(20);
 
         $viewData = [
@@ -103,7 +104,7 @@ class AdminRechargeController extends Controller
         try {
             DB::beginTransaction();
             $rechargeHistory = LichSuNapTien::find($id);
-            $rechargeHistory->tongtien = $request->money + $request->discount;
+            $rechargeHistory->tongtien = $request->tien + $request->giamgia;
             $rechargeHistory->updated_at = Carbon::now();
             $rechargeHistory->nguoidung_id = $request->nguoidung_id;
             $rechargeHistory->trangthai = $request->trangthai;
@@ -118,7 +119,7 @@ class AdminRechargeController extends Controller
                         $rechargeHistory->save();
                     } else {
                         Log::info("--- cộng tiền");
-                        $user->sodukhadung += $rechargeHistory->total_money;
+                        $user->sodukhadung += $rechargeHistory->tongtien;
                         $user->save();
                     }
                 }

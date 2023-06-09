@@ -57,6 +57,9 @@ class RoomService
 
     public static function getListsRoom($request, $params = [])
     {
+        // seft gọi đến chính nó
+        // where lọc đúng 1 trường + giá trị
+        // whereIn lọc 1 trường + nhiều giá trị
         $self = new self();
         $rooms = Phong::whereIn('trangthai', [Phong::STATUS_ACTIVE, Phong::STATUS_EXPIRED]);
 
@@ -64,18 +67,14 @@ class RoomService
             $rooms->where('danhmuc_id', $categoryId);
 
         if ($cityId = Arr::get($params, 'location_city_id'))
-            $rooms->where('thanhpho_id', $cityId);
+            $rooms->where('qhuyen_id', $cityId);
 
-        if ($quan_id = Arr::get($params, 'location_district_id'))
-            $rooms->where('quan_id', $quan_id);
-
-        if ($huyen_id = Arr::get($params, 'huyen_id'))
-            $rooms->where('huyen_id', $huyen_id);
-
+        if ($phuongxa_id = Arr::get($params, 'phuongxa_id'))
+            $rooms->where('phuongxa_id', $phuongxa_id);
         if ($khoanggia = Arr::get($params, 'price'))
             $rooms->where('khoanggia', $khoanggia);
 
-        if ($khoangkhuvuc = Arr::get($params, 'area'))
+        if ($khoangkhuvuc = Arr::get($params, 'khuvuc'))
             $rooms->where('khoangkhuvuc', $khoangkhuvuc);
 
         $rooms = $rooms->select($self->column)->orderByDesc('id')->paginate(10);

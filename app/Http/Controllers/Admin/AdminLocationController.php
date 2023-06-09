@@ -31,10 +31,10 @@ class AdminLocationController extends Controller
 
     public function create()
     {
-        $cities = DiaChi::get();
+        $district = DiaChi::get();
 
         $viewData = [
-            'cities' => $cities
+            'district' => $district
         ];
 
         return view('admin.pages.location.create', $viewData);
@@ -64,10 +64,10 @@ class AdminLocationController extends Controller
     public function edit($id)
     {
         $location = DiaChi::find($id);
-        $cities   = DiaChi::get();
+        $district   = DiaChi::get();
         $viewData = [
             'location' => $location,
-            'cities'   => $cities
+            'district'   => $district
         ];
 
         return view('admin.pages.location.update', $viewData);

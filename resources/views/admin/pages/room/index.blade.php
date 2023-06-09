@@ -41,13 +41,16 @@
                 <td>#{{ $item->id }}</td>
                 <td>
                     <div style="overflow: hidden;width: 100px;height: 100px;margin: 0 auto;position: relative;">
-                        <a href="{{ route('get.room.detail',['id' => $item->id,'slug' => $item->slug]) }}" target="_blank">
-                            <img src="{{ pare_url_file($item->anhdaidien) }}" alt="" style="display: block;width: 100%;height: 100%;object-fit: cover;">
+                        <a href="{{ route('get.room.detail',['id' => $item->id,'slug' => $item->slug]) }}"
+                            target="_blank">
+                            <img src="{{ pare_url_file($item->anhdaidien) }}" alt=""
+                                style="display: block;width: 100%;height: 100%;object-fit: cover;">
                         </a>
                     </div>
                 </td>
                 <td>
-                    <a href="{{ route('get.room.detail',['id' => $item->id,'slug' => $item->slug]) }}" target="_blank" style="font-size: 14px;font-weight: 500;color: #007aff;text-decoration: none">
+                    <a href="{{ route('get.room.detail',['id' => $item->id,'slug' => $item->slug]) }}" target="_blank"
+                        style="font-size: 14px;font-weight: 500;color: #007aff;text-decoration: none">
                         @if ($item->dichvu_hot > 0)
                         @for($i = 1 ; $i <= $item->dichvu_hot ; $i ++)
                             <span style="color: #fed553" class="fa fa-star"></span>
@@ -57,34 +60,39 @@
                     </a>
                     <p style="font-size: 14px;font-weight: 400;color: #212121;text-decoration: none;margin-bottom: 5px">
                         <span class="fa fa-map-marker"></span>
-                        @if (isset($item->district->ten))
-                        <span>{{ $item->district->ten ?? "" }} - </span>
-                        @endif
                         @if (isset($item->wards->ten))
-                        <span>{{ $item->ward->ten ?? "" }} - </span>
+                        <span>{{ $item->wards->ten ?? "" }} - </span>
                         @endif
-                        @if (isset($item->city))
-                        <span>{{ $item->city->ten }}</span>
+                        @if (isset($item->district))
+                        <span>{{ $item->district->ten }}</span>
                         @endif
                     </p>
                     <p style="margin-bottom: 2px">
                         @if ($item->trangthai != \App\Models\Phong::STATUS_ACTIVE)
-                        <a href="{{ route('get_admin.room.success', $item->id) }}" class="text-success" style="font-size: 13px;text-decoration: none;font-weight: 500"><i class="fa fa-refresh"></i>
+                        <a href="{{ route('get_admin.room.success', $item->id) }}" class="text-success"
+                            style="font-size: 13px;text-decoration: none;font-weight: 500"><i class="fa fa-refresh"></i>
                             Duyệt</a>
-                        <a href="{{ route('get_admin.room.expires', $item->id) }}" class="text-warning" style="font-size: 13px;text-decoration: none;font-weight: 500"><i class="fa fa-credit-card"></i> Hết hạn</a>
+                        <a href="{{ route('get_admin.room.expires', $item->id) }}" class="text-warning"
+                            style="font-size: 13px;text-decoration: none;font-weight: 500"><i
+                                class="fa fa-credit-card"></i> Hết hạn</a>
                         @endif
                         @if ($item->trangthai == \App\Models\Phong::STATUS_ACTIVE)
-                        <a href="{{ route('get_admin.room.hide', $item->id) }}" class="text-secondary" style="font-size: 13px;text-decoration: none"> <i class="fa fa-eye-slash"></i> Ẩn tin</a>
+                        <a href="{{ route('get_admin.room.hide', $item->id) }}" class="text-secondary"
+                            style="font-size: 13px;text-decoration: none"> <i class="fa fa-eye-slash"></i> Ẩn tin</a>
                         @endif
-                        <a href="{{ route('get_admin.room.cancel', $item->id) }}" class="text-danger" style="font-size: 13px;text-decoration: none;font-weight: 500"><i class="fa fa-times"></i>
+                        <a href="{{ route('get_admin.room.cancel', $item->id) }}" class="text-danger"
+                            style="font-size: 13px;text-decoration: none;font-weight: 500"><i class="fa fa-times"></i>
                             Huỷ</a>
-                        <a href="{{ route('get_admin.room.delete', $item->id) }}" class="text-danger" style="font-size: 13px;text-decoration: none;font-weight: 500"> <i class="fa fa-trash"></i>Delete</a>
+                        <a href="{{ route('get_admin.room.delete', $item->id) }}" class="text-danger"
+                            style="font-size: 13px;text-decoration: none;font-weight: 500"> <i
+                                class="fa fa-trash"></i>Delete</a>
                     </p>
                     @if ($item->trangthai == \App\Models\Phong::STATUS_CANCEL)
                     <p style="margin-bottom: 2px;font-size: 12px"><i class="text-danger">{{ $item->lydo }}</i></p>
                     @endif
                 </td>
-                <td><span class="label label-danger" style="font-size: 14px">{{ $item->category->ten ?? "[N\A]" }}</span></td>
+                <td><span class="label label-danger"
+                        style="font-size: 14px">{{ $item->category->ten ?? "[N\A]" }}</span></td>
                 <td><span style="font-size: 14px">{{ number_format($item->gia,0,',','.') }} triệu / tháng</span></td>
                 <td>
                     <p style="font-size: 14px;margin-bottom: 5px;"><span>{{ $item->thoigian_batdau }}</span></p>
@@ -93,7 +101,8 @@
                     <p style="font-size: 14px;"><span>{{ $item->thoigian_ketthuc }}</span></p>
                 </td>
                 <td>
-                    <span style="font-size: 14px;" class="{{ $item->getStatus($item->trangthai)['class'] ?? "..." }}">{{ $item->getStatus($item->trangthai)['name'] ?? "..." }}</span>
+                    <span style="font-size: 14px;"
+                        class="{{ $item->getStatus($item->trangthai)['class'] ?? "..." }}">{{ $item->getStatus($item->trangthai)['name'] ?? "..." }}</span>
                 </td>
             </tr>
             @endforeach

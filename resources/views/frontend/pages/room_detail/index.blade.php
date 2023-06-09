@@ -32,7 +32,7 @@
             </div>
         </div>
         <div class="card b-base-info">
-            @if ($room->status == 2)
+            @if ($room->trangthai == 2)
             <style>
                 .alert-warning {
                     color: #856404;
@@ -41,7 +41,7 @@
                 }
             </style>
             <div class="alert alert-warning" role="alert">
-                <p>Tin đăng đã hết hạn, xin vui lòng liên hệ Admin để giải quyết, hoạc click
+                <p>Tin đăng đã hết hạn, xin vui lòng liên hệ Admin để giải quyết, hoặc click
                     <a href="{{ route('get_user.room.pay', $room->id) }}" target="_blank" title="Gia hạn tin">tại
                         đây</a> để gia hạn !
                 </p>
@@ -54,9 +54,9 @@
                         <a href="{{ route('get.category.item',['slug' => $room->category->slug,'id' => $room->danhmuc_id]) }}" title="{{ $room->category->ten }}"><span>{{ $room->category->ten }}</span></a>
                     </li>
                     @endif
-                    @if (isset($room->city->ten))
+                    @if (isset($room->district->ten))
                     <li>
-                        <a href="{{ route('get.room.by_location',['id' => $room->thanhpho_id, 'slug' => $room->city->slug]) }}" title="{{ $room->city->ten }}"><span>{{ $room->city->ten }}</span></a>
+                        <a href="{{ route('get.room.by_district',['id' => $room->qhuyen_id, 'slug' => $room->district->slug]) }}" title="{{ $room->district->ten }}"><span>{{ $room->district->ten }}</span></a>
                     </li>
                     @endif
                     <li><span>{{ $room->ten }}</span></li>
@@ -102,7 +102,7 @@
             </div>
             <div class="card-body">
                 <div class="content-description">
-                    {!! $room->description !!}
+                    {!! $room->mota !!}
                 </div>
             </div>
         </div>
@@ -117,7 +117,7 @@
                             <td class="name">Mã tin:</td>
                             <td>#{{ $room->id }}</td>
                         </tr>
-                        @if (isset($room->city->ten))
+                        @if (isset($room->district->ten))
                         <tr>
                             <td class="name">Khu vực</td>
                             <td>
@@ -127,7 +127,7 @@
                                 @if (isset($room->district->ten))
                                 <span>{{ $room->district->ten ?? "" }} - </span>
                                 @endif
-                                <a href="{{ route('get.room.by_location',['id' => $room->thanhpho_id, 'slug' => $room->city->slug]) }}" title="">{{ $room->city->ten }}</a>
+                                <a href="{{ route('get.room.by_district',['id' => $room->qhuyen_id, 'slug' => $room->district->slug]) }}" title="">{{ $room->district->ten }}</a>
                             </td>
                         </tr>
                         @endif

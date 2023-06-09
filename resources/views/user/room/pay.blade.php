@@ -24,14 +24,15 @@
 </section>
 <h1 class="page-title-h1">Gia hạn tin</h1>
 <style>
-    .alert-warning {
-        color: #856404;
-        background-color: #fff3cd;
-        border-color: #ffeeba;
-    }
+.alert-warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}
 </style>
 <div class="alert alert-warning" role="alert">
-    <p>Nếu bạn đã từng đăng tin trên Phongtro123.com, hãy sử dụng chức năng ĐẨY TIN / GIA HẠN / NÂNG CẤP VIP trong mục
+    <p>Nếu bạn đã từng đăng tin trên Phongtrodanang.com, hãy sử dụng chức năng ĐẨY TIN / GIA HẠN / NÂNG CẤP VIP trong
+        mục
         QUẢN LÝ TIN ĐĂNG để làm mới, đẩy tin lên cao thay vì đăng tin mới. Tin đăng trùng nhau sẽ không được duyệt.</p>
     <p>Xin cảm ơn!</p>
 </div>
@@ -76,44 +77,45 @@
 
 @push('script')
 <script src="/js/home.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" crossorigin="anonymous"
+    referrerpolicy="no-referrer"></script>
 <script>
-    $(function() {
-        $('.js-change-type').change(function() {
-            let $this = $(this);
-            let $day = $("#day option:selected").val();
-            let gia = 0;
-            if ($this.val() == 1) {
-                gia = 2000;
-            } else if ($this.val() == 2) {
-                gia = 20000;
-            } else if ($this.val() == 3) {
-                gia = 30000;
-            } else if ($this.val() == 4) {
-                gia = 50000;
-            } else if ($this.val() == 5) {
-                gia = 80000;
-            }
-            $("#total").val($day * gia);
-        })
-
-        $('#day').change(function() {
-            let $this = $(this);
-            let $type = $(".js-change-type option:selected").val();
-            let gia = 0;
-            if ($type == 1) {
-                gia = 2000;
-            } else if ($type == 2) {
-                gia = 20000;
-            } else if ($type == 3) {
-                gia = 30000;
-            } else if ($type == 4) {
-                gia = 50000;
-            } else if ($type == 5) {
-                gia = 80000;
-            }
-            $("#total").val($this.val() * gia);
-        })
+$(function() {
+    $('.js-change-type').change(function() {
+        let $this = $(this);
+        let $day = $("#day option:selected").val();
+        let gia = 0;
+        if ($this.val() == 1) {
+            gia = 2000;
+        } else if ($this.val() == 2) {
+            gia = 20000;
+        } else if ($this.val() == 3) {
+            gia = 30000;
+        } else if ($this.val() == 4) {
+            gia = 50000;
+        } else if ($this.val() == 5) {
+            gia = 80000;
+        }
+        $("#total").val($day * gia);
     })
+
+    $('#day').change(function() {
+        let $this = $(this);
+        let $type = $(".js-change-type option:selected").val();
+        let gia = 0;
+        if ($type == 1) {
+            gia = 2000;
+        } else if ($type == 2) {
+            gia = 20000;
+        } else if ($type == 3) {
+            gia = 30000;
+        } else if ($type == 4) {
+            gia = 50000;
+        } else if ($type == 5) {
+            gia = 80000;
+        }
+        $("#total").val($this.val() * gia);
+    })
+})
 </script>
 @endpush

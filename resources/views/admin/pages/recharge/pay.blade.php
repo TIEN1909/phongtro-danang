@@ -29,7 +29,7 @@
                 @else
                 <span>Đặc biệt</span>
                 @endif
-                <span>{{ $item->loai }}</span>
+                <!-- <span>{{ $item->loai }}</span> -->
             </td>
             <td scope="row"><span class="text-danger text-bold">{{ number_format($item->tien,0,',','.') }}đ</span></td>
             <!-- <td scope="row">

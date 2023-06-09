@@ -27,9 +27,9 @@
             </div>
             <div class="form-group">
                 <label for="email">Mã xác thực</label>
-                <input type="email" class="form-control" placeholder="" name="code" value="{{ $user->code }}">
-                @if ($errors->first('code'))
-                <span class="text-error">{{ $errors->first('code') }}</span>
+                <input type="email" class="form-control" placeholder="" name="ma" value="{{ $user->ma }}">
+                @if ($errors->first('ma'))
+                <span class="text-error">{{ $errors->first('ma') }}</span>
                 @endif
             </div>
             <div class="form-group">
@@ -40,7 +40,6 @@
 </div>
 
 @include('components.whyus')
-@include('components.support')
 @stop
 
 @push('script')

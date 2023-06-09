@@ -10,8 +10,8 @@ class SearchRoomService
     public static function index(Request $request)
     {
         $params = $request->all();
-        if (isset($params['thanhpho_id'])) $params["location_city_id"] = $params['thanhpho_id'];
-        if (isset($params['quan_id'])) $params["location_district_id"] = $params['quan_id'];
+        if (isset($params['qhuyen_id'])) $params["location_city_id"] = $params['qhuyen_id'];
+        if (isset($params['phuongxa_id'])) $params["location_district_id"] = $params['phuongxa_id'];
 
         $rooms    = RoomService::getListsRoom($request, $params);
         return [

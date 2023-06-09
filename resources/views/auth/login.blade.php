@@ -14,17 +14,23 @@
             @csrf
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="text" class="form-control" placeholder="" name="email">
+                <input type="text" class="form-control" placeholder="" name="email" value="{{old('email')}}">
+                @if ($errors->has('email'))
+                <span class="d-block " style="color:red;font-size:13px">{{ $errors->first('email') }} </span>
+                @endif
             </div>
-            <div class="form-group">
+            <div class=" form-group">
                 <label for="password">Mật khẩu</label>
                 <input type="password" class="form-control" placeholder="" name="password">
+                @if ($errors->has('password'))
+                <span class="d-block " style="color:red; font-size:13px">{{ $errors->first('password') }} </span>
+                @endif
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-blue btn-submit">Đăng nhập</button>
             </div>
             <div class="form-group">
-                <a href="#">Bạn quên mật khẩu?</a>
+                <a href="{{ route('get.forget-password') }}">Bạn quên mật khẩu?</a>
                 <a style="float: right;" href="{{ route('get.register') }}">Tạo tài khoản mới</a>
             </div>
         </form>

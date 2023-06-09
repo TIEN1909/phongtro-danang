@@ -40,11 +40,6 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::get('room/{slug}-{id}', 'RoomDetailController@detail')
         ->name('get.room.detail')
         ->where(['slug' => '[a-z-0-9-]+', 'id' => '[0-9]+',]);
-
-    Route::get('tinh-thanh/{slug}-{id}', 'LocationController@getRoomByLocation')
-        ->name('get.room.by_location')
-        ->where(['slug' => '[a-z-0-9-]+', 'id' => '[0-9]+',]);
-
     Route::get('quan-huyen/{slug}-{id}', 'LocationController@getRoomByDistrict')
         ->name('get.room.by_district')
         ->where(['slug' => '[a-z-0-9-]+', 'id' => '[0-9]+',]);

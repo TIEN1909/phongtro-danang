@@ -20,12 +20,14 @@
                         <span class="star"></span>
                         @endfor
                         @endif
-                        <a href="{{ route('get.room.detail',['id' => $item->id,'slug' => $item->slug]) }}">{{ $item->ten }}</a>
+                        <a
+                            href="{{ route('get.room.detail',['id' => $item->id,'slug' => $item->slug]) }}">{{ $item->ten }}</a>
                 </div>
-                <div class="post-price">{{ number_format($item->price,0,',','.') }} đ</div>
-                <div class="post-acreage fz-13">{{ $item->area }}m²</div>
+                <div class="post-price">{{ number_format($item->gia,0,',','.') }} đ</div>
+                <div class="post-acreage fz-13">{{ $item->khuvuc }}m²</div>
                 <div class="post-location fz-13">
-                    <a href="{{ route('get.room.detail',['id' => $item->id,'slug' => $item->slug]) }}" title="{{ $item->chitietdiachi }}">{{ $item->chitietdiachi }}</a>
+                    <a href="{{ route('get.room.detail',['id' => $item->id,'slug' => $item->slug]) }}"
+                        title="{{ $item->chitietdiachi }}">{{ $item->chitietdiachi }}</a>
                 </div>
                 <time class="post-time fz-13">Cập nhật: {{ $item->updated_at }}</time>
                 <span class="post-hot"></span>

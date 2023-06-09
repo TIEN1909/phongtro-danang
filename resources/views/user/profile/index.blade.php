@@ -18,18 +18,21 @@
             </div>
             <div class="form-group">
                 <label for="phone">Số điện thoại</label>
-                <input type="text" class="form-control" required placeholder="" disabled
-                    value="{{ $user->sodienthoai }}">
+                <input type="text" class="form-control" required placeholder="" disabled value="{{ $user->sodienthoai }}">
                 <a href="{{ route('get_user.profile.update_phone') }}" title="Đổi số điện thoại">Đổi số điện thoại</a>
             </div>
+
             <div class="form-group">
                 <label for="name">Họ tên</label>
                 <input type="text" class="form-control" required placeholder="" name="name" value="{{ $user->ten }}">
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" required placeholder="" name="email"
-                    value="{{ $user->email }}">
+                <input type="email" class="form-control" required placeholder="" name="email" value="{{ $user->email }}">
+            </div>
+            <div class="form-group">
+                <label for="email">Mật khẩu</label>
+                <input type="password" class="form-control" placeholder="" name="password">
             </div>
             <div class="row-lists">
                 <div class="form-group w-100">
@@ -37,8 +40,7 @@
                     <input type="file" name="anhdaidien">
                 </div>
                 @if ($user->anhdaidien)
-                <img src="{{ pare_url_file($user->anhdaidien) }}" style="width: 100px;height: 100px;border-radius: 50%"
-                    alt="">
+                <img src="{{ pare_url_file($user->anhdaidien) }}" style="width: 100px;height: 100px;border-radius: 50%" alt="">
                 @endif
             </div>
             <div class="form-group">

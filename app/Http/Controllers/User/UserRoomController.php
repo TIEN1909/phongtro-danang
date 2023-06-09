@@ -8,6 +8,7 @@ use App\Models\DiaChi;
 use App\Models\DanhMuc;
 use App\Models\LichSuThanhToan;
 use App\Models\Phong;
+use App\Models\NguoiDung;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,10 +22,10 @@ class UserRoomController extends Controller
 {
     public function index(Request $request)
     {
-        $rooms = Phong::with('category:id,ten,slug', 'city:id,ten,slug', 'wards:id,ten,slug', 'district:id,ten,slug', 'paymentHistory:id,phong_id')
+        $rooms = Phong::with('category:id,ten,slug', 'wards:id,ten,slug', 'district:id,ten,slug', 'paymentHistory:id,phong_id')
             ->where("xacthuc_id", Auth::user()->id);
 
-        $rooms = $rooms->orderByDesc("id")->paginate(20);
+        $rooms = $rooms->orderByDesc("id")->paginate(10);
 
         $viewData = [
             'rooms' => $rooms
@@ -35,13 +36,11 @@ class UserRoomController extends Controller
 
     public function create(Request $request)
     {
-        $cities     = DiaChi::select('id', 'ten')->where('loai', 1)->get();
-        $districts  = DiaChi::select('id', 'ten')->where('loai', 2)->get();
-        $wards      = DiaChi::select('id', 'ten')->where('loai', 3)->get();
+        $districts     = DiaChi::select('id', 'ten')->where('loai', 1)->get();
+        $wards      = DiaChi::select('id', 'ten')->where('loai', 2)->get();
         $categories = DanhMuc::select('id', 'ten')->get();
 
         $viewData = [
-            'cities'     => $cities,
             'districts'  => $districts,
             'wards'      => $wards,
             'categories' => $categories
@@ -57,6 +56,10 @@ class UserRoomController extends Controller
         $data['trangthai']     = Phong::STATUS_EXPIRED;
         $data['slug']       = Str::slug($request->ten);
         $data['xacthuc_id']    = Auth::user()->id;
+        //area
+        $data = $this->switchPrice($data);
+        $data = $this->switchArea($data);
+        //price
         if ($request->anhdaidien) {
             $file = upload_image('anhdaidien');
             if (isset($file) && $file['code'] == 1) {
@@ -71,7 +74,9 @@ class UserRoomController extends Controller
             if ($request->file) {
                 $this->syncAlbumImageAndProduct($request->file, $room->id);
             }
-            return redirect()->route('get_user.room.index');
+            // toastr()->success('Data has been saved successfully!', 'Congrats', ['timeOut' => 2000]);
+
+            return redirect()->route('get_user.room.index')->with(['success' => 'Tạo phòng thành công']);
         }
 
         return redirect()->back();
@@ -85,17 +90,14 @@ class UserRoomController extends Controller
         ])->first();
 
         if (!$room) return abort(404);
-
-        $cities     = DiaChi::select('id', 'ten')->where('loai', 1)->get();
-        $districts  = DiaChi::select('id', 'ten')->where('loai', 2)->get();
-        $wards      = DiaChi::select('id', 'ten')->where('loai', 3)->get();
+        $districts  = DiaChi::select('id', 'ten')->where('loai', 1)->get();
+        $wards      = DiaChi::select('id', 'ten')->where('loai', 2)->get();
         $categories = DanhMuc::select('id', 'ten')->get();
         $images     = DB::table('anh')
             ->where("phong_id", $id)
             ->get();
 
         $viewData = [
-            'cities'     => $cities,
             'districts'  => $districts,
             'wards'      => $wards,
             'images'     => $images,
@@ -301,8 +303,8 @@ class UserRoomController extends Controller
     public function loadDistrict(Request $request)
     {
         if ($request->ajax()) {
-            $city      = $request->thanhpho_id;
-            $locations = DiaChi::where('parent_id', $city)->select('id', 'ten', 'slug')->get();
+            $districts      = $request->qhuyen_id;
+            $locations = DiaChi::where('parent_id', $districts)->select('id', 'ten', 'slug')->get();
 
             return response()->json($locations);
         }
@@ -321,7 +323,7 @@ class UserRoomController extends Controller
     public function activeRoom($id)
     {
         $today         = Date::today()->format('Y-m-d');
-        $checkTimeRoom = Phong::with('category:id,ten,slug', 'city:id,ten,slug')
+        $checkTimeRoom = Phong::with('category:id,ten,slug', 'district:id,ten,slug')
             ->whereDate('thoigian_batdau', '<=', $today)
             ->whereDate('thoigian_ketthuc', '>=', $today)
             ->find($id);
@@ -346,8 +348,8 @@ class UserRoomController extends Controller
     public function loadWards(Request $request)
     {
         if ($request->ajax()) {
-            $quan_id = $request->quan_id;
-            $locations   = DiaChi::where('parent_id', $quan_id)->select('id', 'ten', 'slug')->get();
+            $phuongxa_id = $request->phuongxa_id;
+            $locations   = DiaChi::where('parent_id', $phuongxa_id)->select('id', 'ten', 'slug')->get();
 
             return response()->json($locations);
         }
