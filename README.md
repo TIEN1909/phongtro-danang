@@ -1,3 +1,13 @@
+<<<<<<< HEAD
+=======
+laravel 8x
+
+----phongtrodanang
+
+-   1 bảng lưu lại lịch sử nạp tiền => recharge_history
+-   Lịch sử thanh toán => payment_history
+
+>>>>>>> origin/master
 `Đăng tin trừ tiền`
 ` Mỗi tài khoản chỉ được đăng 2 tin miễn phí`
 `Từ tin thứ 3 thì sẽ mất phí 1.000đ 1/ ngày / tin`
