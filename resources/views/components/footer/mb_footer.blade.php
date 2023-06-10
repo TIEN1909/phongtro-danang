@@ -2,9 +2,7 @@
     <a class="item home" href="{{ route('get.home') }}">
         <i class="fa fa-home" aria-hidden="true"></i> Trang chủ
     </a>
-    <a rel="nofollow" class="item bookmark" href="#">
-        <i class="fa fa-heart-o" aria-hidden="true"></i> Yêu thích
-    </a>
+
     <a rel="nofollow" class="item add-post" href="#">
         <div class="btn-add-post">
             <div class="inner"><i class="fa fa-plus-circle" aria-hidden="true"></i> Đăng tin</div>

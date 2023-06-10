@@ -93,7 +93,7 @@ class UserRoomController extends Controller
         $districts  = DiaChi::select('id', 'ten')->where('loai', 1)->get();
         $wards      = DiaChi::select('id', 'ten')->where('loai', 2)->get();
         $categories = DanhMuc::select('id', 'ten')->get();
-        $images     = DB::table('anh')
+        $images     = DB::table('hinhanh_ct')
             ->where("phong_id", $id)
             ->get();
 
@@ -372,7 +372,7 @@ class UserRoomController extends Controller
             }
 
             $fileImage->move($path, $filename);
-            DB::table('anh')
+            DB::table('hinhanh_ct')
                 ->insert([
                     'ten'       => $fileImage->getClientOriginalName(),
                     'duongdan'       => $filename,
@@ -384,7 +384,7 @@ class UserRoomController extends Controller
 
     public function deleteImage($imageID)
     {
-        DB::table('anh')->where('id', $imageID)->delete();
+        DB::table('hinhanh_ct')->where('id', $imageID)->delete();
         return redirect()->back();
     }
 }

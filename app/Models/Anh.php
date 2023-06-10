@@ -9,6 +9,6 @@ class Anh extends Model
 {
     use HasFactory;
 
-    protected $table = 'anh';
+    protected $table = 'hinhanh_ct';
     protected $guarded = [''];
 }

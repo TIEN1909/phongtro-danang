@@ -36,3 +36,21 @@
       transform: translateX(-100%);
     }
   }
+
+  @media (max-width: 991px) {
+    .hero {
+        z-index: -1;
+    }
+    .hero-image {
+        height: auto;
+    }
+}
+
+@media (max-width: 767px){
+    .hero {
+        z-index: -1;
+    }
+    .hero-image {
+        height: auto;
+    }
+}

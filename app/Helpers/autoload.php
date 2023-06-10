@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm .
  * User: trungphuna .
@@ -33,11 +34,11 @@ if (!function_exists('upload_image')) {
     function upload_image($file, $folder = '', array $extend = array())
     {
         $code = 1;
-        // lay duong dan anh
+        // lay duong dan hinhanh_ct
         $baseFilename = public_path() . '/uploads/' . $_FILES[$file]['name'];
 
         $size = $_FILES[$file]['size'];
-        $size =  round($size / (1024),1);
+        $size =  round($size / (1024), 1);
 
         // thong tin file
         $info = new SplFileInfo($baseFilename);
@@ -116,7 +117,6 @@ if (!function_exists('apart_time')) {
         $start = \Carbon\Carbon::parse($start);
         $stop = \Carbon\Carbon::parse($stop);
         return $stop->diffInSeconds($start);
-
     }
 }
 
@@ -124,8 +124,7 @@ if (!function_exists('detect_category_expenditure')) {
     function detect_category_expenditure($id)
     {
         $categories = (new \TrungPhuNA\Admin\Entities\Expenditure())->getCategories();
-        foreach ($categories as $item)
-        {
+        foreach ($categories as $item) {
             if ($item['id'] === $id) return $item;
         }
         return  "[N\A]";
@@ -140,11 +139,11 @@ if (!function_exists('get_name_short')) {
 
         $name      = trim($name);
 
-        $arrayName = explode(' ', $name,2);
+        $arrayName = explode(' ', $name, 2);
         $string = '';
         if (count($arrayName)) {
             foreach ($arrayName as $item) {
-                $string .= mb_substr($item,0,1);
+                $string .= mb_substr($item, 0, 1);
             }
         }
 
@@ -153,7 +152,8 @@ if (!function_exists('get_name_short')) {
 }
 
 
-function generateRandomString($length = 10) {
+function generateRandomString($length = 10)
+{
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $charactersLength = strlen($characters);
     $randomString = '';

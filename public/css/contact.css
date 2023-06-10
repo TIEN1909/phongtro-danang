@@ -2594,9 +2594,9 @@ i {
   margin: 5px 0;
   display: block;
   padding: 9px 12px;
-  background-color: #fff;
+  background-color: transparent;
   border-radius: 5px;
-  color: #000;
+  color: #fff;
   font-size: 13px;
 }
 .footer .footer-content .footer-nav .footer-col .footer-menu > li > a:hover {
@@ -2849,6 +2849,22 @@ i {
   }
   100% {
     transform: translateX(-100%);
+  }
+}
+@media (max-width: 991px) {
+  .hero {
+    z-index: -1;
+  }
+  .hero-image {
+    height: auto;
+  }
+}
+@media (max-width: 767px) {
+  .hero {
+    z-index: -1;
+  }
+  .hero-image {
+    height: auto;
   }
 }
 .b-contact {

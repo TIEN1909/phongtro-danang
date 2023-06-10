@@ -42,7 +42,7 @@ class PageRoomDetailService
             'location_city_id' => $room->qhuyen_id,
         ]);
 
-        $images = DB::table('anh')
+        $images = DB::table('hinhanh_ct')
             ->where("phong_id", $id)
             ->select('duongdan')->get();
 
