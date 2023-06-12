@@ -22,6 +22,9 @@ class SearchRoomController extends Controller
             $wards = DiaChi::where('parent_id', $request->phuongxa_id)->get();
             $data['wards'] = $wards;
         }
+        // check lọc
+
+        // end
         return view('frontend.pages.search_room.index', $data);
     }
 }

@@ -20,7 +20,7 @@ class AdminDashboardController extends Controller
         $totalRechargeHistory = LichSuNapTien::select('id')->count();
         $users = NguoiDung::orderByDesc('id')->limit(20)->get();
         $paymentHistory = LichSuThanhToan::with('user:id,ten')->orderByDesc('id')->limit(20)->get();
-        $rechargeHistory = LichSuNapTien::with('user:id,ten')->orderByDesc('id')->limit(20)->get();
+        $rechargeHistory = LichSuNapTien::with('user:id,ten')->orderByDesc('id')->get();
 
         $viewData = [
             'totalUser'            => $totalUser,

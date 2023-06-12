@@ -26,7 +26,7 @@ class CreateRoomsTable extends Migration
             $table->tinyInteger('trangthai')->default(1);
             $table->tinyInteger('khoanggia')->default(1);
             $table->tinyInteger('khoangkhuvuc')->default(1);
-            $table->tinyInteger('dichvu_hot')->default(0)->comment(' lưu lại v1, vip2 hay vip gì');
+            $table->tinyInteger('dichvu_hot')->default(0)->comment(' lưu lại v1, vip2 hay vip 3');
             $table->integer('khuvuc')->default(0);
             $table->string('sophong')->nullable();
             $table->string('chitietdiachi')->nullable();

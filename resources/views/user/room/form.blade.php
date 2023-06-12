@@ -1,5 +1,11 @@
 <form action="" method="POST" autocomplete="off" enctype="multipart/form-data">
     @csrf
+    <style>
+    .ck-blurred,
+    .ck-content {
+        min-height: 200px;
+    }
+    </style>
     <div class="form-room container">
         <div class="room-left">
             <h4>Địa chỉ cho thuê</h4>
@@ -32,7 +38,7 @@
                     <select name="phuongxa_id" class="form-control " id="phuongxa_id"
                         data-placeholder="Click chọn quận huyện">
                         <option value="">Chọn phường xã</option>
-                        @foreach($districts ?? [] as $item)
+                        @foreach($wards ?? [] as $item)
                         <option value="{{ $item->id }}" {{ $item->id == ($room->phuongxa_id ?? 0) ? "selected" : ""}}>
                             {{ $item->ten }}
                         </option>
@@ -40,19 +46,6 @@
                     </select>
                     @if ($errors->first('phuongxa_id'))
                     <span class="text-error">{{ $errors->first('phuongxa_id') }}</span>
-                    @endif
-                </div>
-                <div class="form-group row-lists-3  d-none">
-                    <label for="name">Phường xã</label>
-                    <select name="huyen_id" class="form-control" id="huyen_id" data-placeholder="Click chọn phường xã">
-                        @foreach($wards ?? [] as $item)
-                        <option value="{{ $item->id }}" {{ $item->id == ($room->huyen_id ?? 0) ? "selected" : ""}}>
-                            {{ $item->ten }}
-                        </option>
-                        @endforeach
-                    </select>
-                    @if ($errors->first('huyen_id'))
-                    <span class="text-error">{{ $errors->first('huyen_id') }}</span>
                     @endif
                 </div>
             </div>
@@ -66,7 +59,8 @@
             <div class="row-lists">
                 <div class="form-group w-100">
                     <label for="name">Địa chỉ chính xác</label>
-                    <input type="text" name="chitietdiachi" class="form-control" placeholder="Địa chỉ chính xác">
+                    <input type="text" name="chitietdiachi" class="form-control" placeholder="Địa chỉ chính xác"
+                        value="{{ $room->chitietdiachi ?? '' }}">
                 </div>
             </div>
             <h4>Thông tin mô tả</h4>
@@ -101,13 +95,14 @@
             <div class="row-lists">
                 <div class="form-group w-100">
                     <label for="name">Mô tả nội dung</label>
-                    <textarea name="mota" class="form-control" id="" cols="30"
+                    <textarea name="mota" class="form-control" id="editor" cols="30"
                         rows="3">{{ $room->mota ?? "" }}</textarea>
                     @if ($errors->first('mota'))
                     <span class="text-error">{{ $errors->first('mota') }}</span>
                     @endif
                 </div>
             </div>
+
             <div class="row-lists">
                 <div class="form-group w-100">
                     <label for="name">Map</label>
@@ -157,7 +152,7 @@
             <div class="row-lists">
                 <div class="form-group">
                     <label for="name">Giá cho thuê ( Đồng )</label>
-                    <input type="text" name="gia" class="form-control" placeholder=""
+                    <input type="text" class="input-price" name="gia" class="form-control" placeholder=""
                         value="{{ number_format($room->gia ?? 0,0,',','.') ?? 0 }}">
                 </div>
             </div>
@@ -199,6 +194,8 @@ var URL_LOAD_WARD = '{{ route("get_user.load.wards") }}'
 </script>
 @push('script')
 <script src="/js/user_room.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" crossorigin="anonymous"
     referrerpolicy="no-referrer"></script>
 
@@ -209,6 +206,27 @@ var URL_LOAD_WARD = '{{ route("get_user.load.wards") }}'
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.7/themes/fa/theme.js"
     type="text/javascript"></script>
+<script type="text/javascript">
+var inputField = document.querySelector('.input-price')
+inputField.oninput = function() {
+    var removeChar = this.value.replace(/[^0-9\.]/g, '') // This is to remove alphabets and special characters.
+    // console.log(removeChar);
+    var removeDot = removeChar.replace(/\./g, '') // This is to remove "DOT"
+    this.value = removeDot
+
+    var formatedNumber = this.value.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    // console.log(formatedNumber);
+    this.value = formatedNumber
+
+}
+</script>
+<script>
+ClassicEditor
+    .create(document.querySelector('#editor'))
+    .catch(error => {
+        console.error(error);
+    });
+</script>
 
 <script>
 $(function() {
@@ -257,6 +275,7 @@ $(function() {
                 console.log('---------- data: ', data);
             });
     })
+
 })
 </script>
 @endpush

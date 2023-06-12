@@ -7,7 +7,7 @@
 @section('content')
 <div class="b-auth">
     <div class="auth-header">
-        <h1 class="title">Tạo tài khoản mới</h1>
+        <h1 class="title" style="text-align: center;">Tạo tài khoản mới</h1>
     </div>
     <div class="auth-content">
         <form action="" method="POST" autocomplete="off">
@@ -30,7 +30,8 @@
                 <input type="password" class="form-control" required placeholder="" name="password">
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-blue btn-submit">Tạo tài khoản</button>
+                <button type="submit" class="btn btn-blue btn-submit" style="background-color: #102136;">Tạo tài
+                    khoản</button>
             </div>
 
             <div class="form-group form-group-register">

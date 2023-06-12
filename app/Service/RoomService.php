@@ -63,19 +63,30 @@ class RoomService
         $self = new self();
         $rooms = Phong::whereIn('trangthai', [Phong::STATUS_ACTIVE, Phong::STATUS_EXPIRED]);
 
-        if ($categoryId = Arr::get($params, 'danhmuc_id'))
+        if ($categoryId = Arr::get($params, 'danhmuc_id')) {
+            // dd("Hello danh muc" . Arr::get($params, 'danhmuc_id'));
             $rooms->where('danhmuc_id', $categoryId);
+        }
 
-        if ($cityId = Arr::get($params, 'location_city_id'))
+        if ($cityId = Arr::get($params, 'location_city_id')) {
+            // dd("Hello city" . Arr::get($params, 'location_city_id'));
             $rooms->where('qhuyen_id', $cityId);
+        }
 
-        if ($phuongxa_id = Arr::get($params, 'phuongxa_id'))
+        if ($phuongxa_id = Arr::get($params, 'phuongxa_id')) {
+            // dd("Hello px" . Arr::get($params, 'phuongxa_id'));
             $rooms->where('phuongxa_id', $phuongxa_id);
-        if ($khoanggia = Arr::get($params, 'price'))
-            $rooms->where('khoanggia', $khoanggia);
+        }
 
-        if ($khoangkhuvuc = Arr::get($params, 'khuvuc'))
+        if ($khoanggia = Arr::get($params, 'price')) {
+            // dd("Hello gia " . Arr::get($params, 'price'));
+            $rooms->where('khoanggia', $khoanggia);
+        }
+
+        if ($khoangkhuvuc = Arr::get($params, 'khuvuc')) {
+            // dd("Hello" . Arr::get($params, 'khuvuc'));
             $rooms->where('khoangkhuvuc', $khoangkhuvuc);
+        }
 
         $rooms = $rooms->select($self->column)->orderByDesc('id')->paginate(10);
 

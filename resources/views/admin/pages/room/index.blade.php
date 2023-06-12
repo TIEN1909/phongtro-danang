@@ -80,9 +80,9 @@
                         <a href="{{ route('get_admin.room.hide', $item->id) }}" class="text-secondary"
                             style="font-size: 13px;text-decoration: none"> <i class="fa fa-eye-slash"></i> Ẩn tin</a>
                         @endif
-                        <a href="{{ route('get_admin.room.cancel', $item->id) }}" class="text-danger"
+                        <!-- <a href="{{ route('get_admin.room.cancel', $item->id) }}" class="text-danger"
                             style="font-size: 13px;text-decoration: none;font-weight: 500"><i class="fa fa-times"></i>
-                            Huỷ</a>
+                            Huỷ</a> -->
                         <a href="{{ route('get_admin.room.delete', $item->id) }}" class="text-danger"
                             style="font-size: 13px;text-decoration: none;font-weight: 500"> <i
                                 class="fa fa-trash"></i>Delete</a>

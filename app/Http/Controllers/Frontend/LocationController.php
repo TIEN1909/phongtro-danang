@@ -27,4 +27,14 @@ class LocationController extends Controller
         $data = PageLocationService::indexByWards($id, $request);
         return view('frontend.pages.location.index', $data);
     }
+    public function getRoomByPrice($id, Request $request)
+    {
+        $data = PageLocationService::indexByPrice($id, $request);
+        return view('frontend.pages.location.index', $data);
+    }
+    public function getRoomByArea($id, Request $request)
+    {
+        $data = PageLocationService::indexByArea($id, $request);
+        return view('frontend.pages.location.index', $data);
+    }
 }

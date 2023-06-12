@@ -7,7 +7,7 @@
 @section('content')
 <div class="b-auth">
     <div class="auth-header">
-        <h1 class="title">Cập nhật thông tin</h1>
+        <h1 class="title" style="text-align: center;">Cập nhật thông tin</h1>
     </div>
     <div class="auth-content">
         <form action="" method="POST" autocomplete="off" enctype="multipart/form-data">
@@ -44,7 +44,8 @@
                 @endif
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-blue btn-submit">Cập nhật tài khoản</button>
+                <button type="submit" class="btn btn-blue btn-submit " style="background-color: #102136;">Cập nhật tài
+                    khoản</button>
             </div>
         </form>
     </div>

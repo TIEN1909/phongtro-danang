@@ -17,13 +17,15 @@
                 <input type="text" class="form-control" require placeholder="" name="email">
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-blue btn-submit"> Xác nhận</button>
+                <button type="submit" class="btn btn-blue btn-submit" style="background-color: #102136"> Xác
+                    nhận</button>
             </div>
         </form>
     </div>
 </div>
 
 @stop
+
 
 @push('script')
 <script src="/js/auth.js"></script>

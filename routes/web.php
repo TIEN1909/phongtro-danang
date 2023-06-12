@@ -48,6 +48,7 @@ Route::group(['namespace' => 'Frontend'], function () {
         ->name('get.room.by_wards')
         ->where(['slug' => '[a-z-0-9-]+', 'id' => '[0-9]+',]);
 
+
     Route::get('bai-viet', 'BlogController@index')
         ->name('get.blog.index');
 

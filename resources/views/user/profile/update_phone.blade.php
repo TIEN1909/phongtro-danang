@@ -10,24 +10,24 @@
         <h1 class="title">Cập nhật số điện thoại</h1>
     </div>
     <div class="auth-content">
-        <form action="" method="POST" autocomplete="off">
-            @csrf
+        <form action="{{ route('post_user.profile.update_phone') }}" method="POST" autocomplete="off">
+
             <div class="form-group">
                 <label for="phone">Số điện thoại cũ</label>
-                <input type="text" class="form-control" placeholder="" name="phone_old" disabled value="{{ $user->sodienthoai }}">
+                <input type="text" class="form-control" placeholder="" name="sodienthoai" disabled value="{{ $user->sodienthoai }}">
             </div>
             <div class="form-group">
                 <label for="phone">Số điện thoại mới</label>
-                <input type="text" class="form-control" id="phone_new" placeholder="" name="phone_new" value="">
+                <input type="text" class="form-control" id="phone_new" placeholder="" name="phone_new" value="{{ old('phone_new') }}">
                 @if ($errors->first('phone_new'))
                 <span class="text-error d-block">{{ $errors->first('phone_new') }}</span>
                 @endif
-                <a href="javascript:;void(0)" class="js-get-code-phone">Lấy mã xác thực</a>
+                <a href="/user/send-code">Lấy mã xác thực</a>
                 <p><i>Mã xác thực sẽ gửi về số điện thoại / email mới của bạn</i></p>
             </div>
             <div class="form-group">
-                <label for="email">Mã xác thực</label>
-                <input type="email" class="form-control" placeholder="" name="ma" value="{{ $user->ma }}">
+                <label for="text">Mã xác thực</label>
+                <input type="text" class="form-control" placeholder="" name="ma" value="{{ $user->ma }}">
                 @if ($errors->first('ma'))
                 <span class="text-error">{{ $errors->first('ma') }}</span>
                 @endif

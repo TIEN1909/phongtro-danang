@@ -11,7 +11,10 @@ Route::group(['namespace' => 'User', 'prefix' => 'user', 'middleware' => 'checkL
     Route::get('cap-nhat-so-dien-thoai.html', 'UserProfileController@updatePhone')->name('get_user.profile.update_phone');
     Route::post('cap-nhat-so-dien-thoai.html', 'UserProfileController@processUpdatePhone');
 
-    Route::post('send-code', 'UserProfileController@sendCode')->name('post_user.send_code');
+
+    // không chuyền data gì hết nên k gửi gì hết, vì function 
+    Route::get('send-code', 'UserProfileController@sendCode')->name('post_user.send_code');
+    Route::post('cap-nhat-so-dien-thoai.html', 'UserProfileController@updatePhone')->name('post_user.profile.update_phone');
 
 
     Route::group(['prefix' => 'room'], function () {

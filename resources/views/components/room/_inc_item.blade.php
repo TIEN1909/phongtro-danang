@@ -3,9 +3,7 @@
         <a href="{{ route('get.room.detail',['id' => $item->id,'slug' => $item->slug]) }}" class="a-img">
             <img src="{{ pare_url_file($item->anhdaidien) }}" alt="{{ $item->ten }}">
             {{-- <span class="images-number">5 ảnh</span>--}}
-            <span class="post-save js-btn-save">
-                <i></i>
-            </span>
+
         </a>
     </div>
     <div class="post-item__info">
@@ -15,13 +13,13 @@
                 <span class="star"></span>
                 @endfor
                 @endif
-                <a href="{{ route('get.room.detail',['id' => $item->id,'slug' => $item->slug]) }}" title="{{ $item->ten }}">{{ $item->ten }}</a>
+                <a href="{{ route('get.room.detail',['id' => $item->id,'slug' => $item->slug]) }}"
+                    title="{{ $item->ten }}">{{ $item->ten }}</a>
         </div>
         <div class="meta-salry-time">
             <div class="post-price">{{ number_format($item->gia,0,',','.') }} đ
             </div>
-            <div class="post-area">Địa chỉ chi tiết: {{$item-> chitietdiachi }}
-            </div>
+
             <div class="post-time fz-13">Cập nhật: {{ $item->updated_at }}</div>
         </div>
         <div class="meta-acreage-location">
@@ -31,8 +29,8 @@
             </span>
         </div>
         {{-- <span class="post-hot"></span>--}}
-        <p class="post-summary">
-            {{ $item->mota }}
-        </p>
+        <div class="post-summary">
+            {!! $item->mota !!}
+        </div>
     </div>
 </div>

@@ -28,17 +28,16 @@
                 </div>
                 <span class="chothuenhanh-label"></span>
                 <span class="post-hot"></span>
-                <span class="post-save js-btn-save"><i></i></span>
             </div>
         </div>
         <div class="card b-base-info">
             @if ($room->trangthai == 2)
             <style>
-                .alert-warning {
-                    color: #856404;
-                    background-color: #fff3cd;
-                    border-color: #ffeeba;
-                }
+            .alert-warning {
+                color: #856404;
+                background-color: #fff3cd;
+                border-color: #ffeeba;
+            }
             </style>
             <div class="alert alert-warning" role="alert">
                 <p>Tin đăng đã hết hạn, xin vui lòng liên hệ Admin để giải quyết, hoặc click
@@ -51,12 +50,14 @@
                 <ol>
                     @if (isset($room->category->ten))
                     <li>
-                        <a href="{{ route('get.category.item',['slug' => $room->category->slug,'id' => $room->danhmuc_id]) }}" title="{{ $room->category->ten }}"><span>{{ $room->category->ten }}</span></a>
+                        <a href="{{ route('get.category.item',['slug' => $room->category->slug,'id' => $room->danhmuc_id]) }}"
+                            title="{{ $room->category->ten }}"><span>{{ $room->category->ten }}</span></a>
                     </li>
                     @endif
                     @if (isset($room->district->ten))
                     <li>
-                        <a href="{{ route('get.room.by_district',['id' => $room->qhuyen_id, 'slug' => $room->district->slug]) }}" title="{{ $room->district->ten }}"><span>{{ $room->district->ten }}</span></a>
+                        <a href="{{ route('get.room.by_district',['id' => $room->qhuyen_id, 'slug' => $room->district->slug]) }}"
+                            title="{{ $room->district->ten }}"><span>{{ $room->district->ten }}</span></a>
                     </li>
                     @endif
                     <li><span>{{ $room->ten }}</span></li>
@@ -72,7 +73,8 @@
             </div>
             @if (isset($room->category->ten))
             <div class="post-cate">
-                Chuyên mục: <a href="{{ route('get.category.item',['slug' => $room->category->slug,'id' => $room->danhmuc_id]) }}">
+                Chuyên mục: <a
+                    href="{{ route('get.category.item',['slug' => $room->category->slug,'id' => $room->danhmuc_id]) }}">
                     {{ $room->category->ten ?? "" }}</a>
             </div>
             @endif
@@ -127,14 +129,16 @@
                                 @if (isset($room->district->ten))
                                 <span>{{ $room->district->ten ?? "" }} - </span>
                                 @endif
-                                <a href="{{ route('get.room.by_district',['id' => $room->qhuyen_id, 'slug' => $room->district->slug]) }}" title="">{{ $room->district->ten }}</a>
+                                <a href="{{ route('get.room.by_district',['id' => $room->qhuyen_id, 'slug' => $room->district->slug]) }}"
+                                    title="">{{ $room->district->ten }}</a>
                             </td>
                         </tr>
                         @endif
                         @if (isset($room->category->ten))
                         <tr>
                             <td class="name">Loại tin rao:</td>
-                            <td><a href="{{ route('get.category.item',['slug' => $room->category->slug,'id' => $room->danhmuc_id]) }}">{{ $room->category->ten }}</a>
+                            <td><a
+                                    href="{{ route('get.category.item',['slug' => $room->category->slug,'id' => $room->danhmuc_id]) }}">{{ $room->category->ten }}</a>
                             </td>
                         </tr>
                         @endif
@@ -179,7 +183,7 @@
                     {!! $room->map !!}
                 </div>
                 <p class="map-description">
-                    sMọi thông tin trên website chỉ mang tính chất tham khảo. Nếu bạn có phản hồi
+                    Mọi thông tin trên website chỉ mang tính chất tham khảo. Nếu bạn có phản hồi
                     với tin đăng này (báo xấu, tin đã cho thuê, không liên lạc được,...), vui lòng thông báo để
                     phongtrodanang.com có thể xử lý.
                 </p>
@@ -202,7 +206,7 @@
         </div>
         <div class="post-bottom-bar">
             <a class="item call" rel="nofollow" href="tel:094227458"><i class="fa fa-phone" aria-hidden="true"></i>
-                094227458</a>
+                0942274558</a>
             <a class="item zalo" rel="nofollow" href="https://zalo.me/094227458">Zalo</a>
             <a class="item sms" rel="nofollow" href="sms:094227458">Nhắn tin</a>
         </div>
@@ -219,7 +223,8 @@
                         <a class="btn btn-phone" rel="nofollow" href="tel:{{ $author->sodienthoai ?? '' }}">
                             <i class="fa fa-phone" aria-hidden="true"></i> {{ $author->sodienthoai ?? '' }}
                         </a>
-                        <a class="btn btn-zalo" target="_blank" rel="nofollow" href="https://zalo.me/{{ $author->sodienthoai ?? '' }}">
+                        <a class="btn btn-zalo" target="_blank" rel="nofollow"
+                            href="https://zalo.me/{{ $author->sodienthoai ?? '' }}">
                             Nhắn Zalo
                         </a>
                     </div>

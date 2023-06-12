@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMadienthoaiTable extends Migration
+class CreateMaDienThoaiTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateMadienthoaiTable extends Migration
      */
     public function up()
     {
-        Schema::create('madienthoai', function (Blueprint $table) {
+        Schema::create('ma_dien_thoai', function (Blueprint $table) {
             $table->id();
-
+            $table->string('maxacthuc', 100)->unique();
+            $table->tinyInteger('is_hoatdong')->default(0);
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class CreateMadienthoaiTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('madienthoai');
+        Schema::dropIfExists('ma_dien_thoai');
     }
 }

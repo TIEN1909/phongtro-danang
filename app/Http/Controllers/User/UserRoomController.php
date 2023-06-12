@@ -56,6 +56,7 @@ class UserRoomController extends Controller
         $data['trangthai']     = Phong::STATUS_EXPIRED;
         $data['slug']       = Str::slug($request->ten);
         $data['xacthuc_id']    = Auth::user()->id;
+        $data['gia'] = str_replace(',', '', $data['gia']);
         //area
         $data = $this->switchPrice($data);
         $data = $this->switchArea($data);
@@ -74,9 +75,9 @@ class UserRoomController extends Controller
             if ($request->file) {
                 $this->syncAlbumImageAndProduct($request->file, $room->id);
             }
-            // toastr()->success('Data has been saved successfully!', 'Congrats', ['timeOut' => 2000]);
-
-            return redirect()->route('get_user.room.index')->with(['success' => 'Tạo phòng thành công']);
+            toastr()->success('Tạo phòng thành công!', 'Thông báo', ['timeOut' => 200]);
+            // ->with(['success' => 'Tạo phòng thành công'])
+            return redirect()->route('get_user.room.index');
         }
 
         return redirect()->back();
@@ -115,6 +116,7 @@ class UserRoomController extends Controller
         $data['updated_at'] = Carbon::now();
         $data['gia']      = str_replace('.', '', $request->gia);
         $data['slug']       = Str::slug($request->ten);
+        $data['gia'] = str_replace(',', '', $data['gia']);
 
         if ($request->anhdaidien) {
             $file = upload_image('anhdaidien');

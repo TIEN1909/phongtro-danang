@@ -17,7 +17,6 @@
             <th>#</th>
             <th>Tên</th>
             <th>Phân loại</th>
-            <th>Trạng thái</th>
             <th>Nổi bật</th>
             <th>Ngày tạo</th>
             <th>Tuỳ chọn</th>
@@ -30,7 +29,7 @@
             <td scope="row">{{ $item->id }}</td>
             <td scope="row">{{ $item->ten }}</td>
             <td scope="row">{{ $item->getType($item->loai) }}</td>
-            <td scope="row"><span class="text-success"></span></td>
+
             <td scope="row">
                 @if ($item->hot == 1)
                 <span class="text-danger">Hot</span>

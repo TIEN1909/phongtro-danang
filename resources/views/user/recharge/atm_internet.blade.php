@@ -25,10 +25,9 @@
             <div class="form-group">
                 <label for="phone">Số tiền nạp</label>
                 <input type="number" class="form-control" placeholder="" name="gia" value="">
-                <p><i>Số tiền cần nạp tối thiểu phải lớn 10.000 đ</i></p>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-blue btn-submit">Tiếp tục ></button>
+                <button type="submit" class="btn btn-blue btn-submit">Tiếp tục </button>
             </div>
         </form>
     </div>

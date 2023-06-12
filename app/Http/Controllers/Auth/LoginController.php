@@ -19,12 +19,12 @@ class LoginController extends Controller
         $data = $request->except('_token');
         if (Auth::attempt($data)) {
 
-            toastr()->success('Đăng nhập thành công !', 'Thông báo', ['timeOut' => 1000]);
+            toastr()->success('Đăng nhập thành công !', 'Thông báo', ['timeOut' => 300]);
             return redirect()->to('/');
         }
 
 
-        toastr()->error('Email hoặc mật khẩu không chính xác !', 'Thông báo', ['timeOut' => 1000]);
+        toastr()->error('Email hoặc mật khẩu không chính xác !', 'Thông báo', ['timeOut' => 300]);
 
         return redirect()->back();
     }

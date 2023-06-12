@@ -7,7 +7,7 @@
 @section('content')
 <div class="b-auth">
     <div class="auth-header">
-        <h1 class="title">Đăng nhập</h1>
+        <h1 class="title" style="text-align: center;">Đăng nhập</h1>
     </div>
     <div class="auth-content">
         <form action="" method="POST" autocomplete="off">
@@ -27,7 +27,8 @@
                 @endif
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-blue btn-submit">Đăng nhập</button>
+                <button type="submit" class="btn btn-blue btn-submit" style="background-color: #102136;">Đăng
+                    nhập</button>
             </div>
             <div class="form-group">
                 <a href="{{ route('get.forget-password') }}">Bạn quên mật khẩu?</a>

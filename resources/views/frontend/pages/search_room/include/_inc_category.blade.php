@@ -19,9 +19,6 @@
                                 <a href="" class="a-img">
                                     <img src="{{ url('images/news-1.jpg') }}" alt="">
                                     <span class="images-number">5 ảnh</span>
-                                    <span class="post-save js-btn-save">
-                                        <i></i>
-                                    </span>
                                 </a>
                             </div>
                             <div class="post-item__info">
@@ -61,9 +58,7 @@
                                 <a href="" class="a-img">
                                     <img src="{{ url('images/news-1.jpg') }}" alt="">
                                     <span class="images-number">5 ảnh</span>
-                                    <span class="post-save js-btn-save">
-                                        <i></i>
-                                    </span>
+
                                 </a>
                             </div>
                             <div class="post-item__info">

@@ -96,7 +96,8 @@ body {
                     <label>Password</label>
                     <input type="password" name="password" required class="form-control" placeholder="Password">
                 </div>
-                <button type="submit" class="btn btn-black" onclick="check()">Login</button>
+                <button type="submit" class="btn btn-black" onclick="check()"
+                    style="background-color: #102136; width:100%">Login</button>
             </form>
         </div>
     </div>
